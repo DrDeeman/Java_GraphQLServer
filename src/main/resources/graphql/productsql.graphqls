@@ -1,0 +1,14 @@
+
+
+type Product{
+id: ID!,
+name: String,
+price: Float,
+year_issue: String,
+raiting: Float
+}
+
+type Query{
+getProduct(id: ID!):Product
+getProductsAll:[Product]
+}

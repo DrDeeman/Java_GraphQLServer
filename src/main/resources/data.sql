@@ -1,0 +1,1 @@
+INSERT INTO products(name, raiting) VALUES('test1',10);
