@@ -21,10 +21,6 @@ public class UserQuery {
 
     @QueryMapping
     public List<eUsers> getUsersAll(){
-        var iter = usersRepository.findAll().iterator();
-        iter.forEachRemaining(action->{
-            System.out.println(action.getProducts().size());
-        });
         return Lists.newArrayList(usersRepository.findAll());
     }
 

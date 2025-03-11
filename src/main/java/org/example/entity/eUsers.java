@@ -2,15 +2,9 @@ package org.example.entity;
 // Generated 7 мар. 2025 г., 11:03:17 by Hibernate Tools 3.2.2.GA
 
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -20,6 +14,11 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "users"
 )
+@NamedEntityGraphs({
+        @NamedEntityGraph(name = "allJoinsWithProducts", attributeNodes = {
+                @NamedAttributeNode("products")
+        })
+})
 public class eUsers implements java.io.Serializable {
 
 
@@ -91,7 +90,7 @@ public class eUsers implements java.io.Serializable {
     }
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     public List<eProducts> getProducts() {
         return this.products;
     }
