@@ -5,7 +5,8 @@ id: ID!,
 name: String,
 price: Float,
 year_issue: String,
-raiting: Float
+raiting: Float,
+user: User
 }
 
 
