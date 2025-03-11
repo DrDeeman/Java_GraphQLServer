@@ -8,6 +8,7 @@ year_issue: String,
 raiting: Float
 }
 
+
 type Query{
 getProduct(id: ID!):Product
 getProductsAll:[Product]

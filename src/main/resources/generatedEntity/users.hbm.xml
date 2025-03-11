@@ -16,5 +16,9 @@
         <property name="login" column="login" type="string"/>
         <property name="password" column="password" type="string"/>
         <property name="email" column="email" type="string"/>
+        <set name="products" cascade="save-update" lazy="true" inverse="true">
+            <key column="userId" not-null="true"></key>
+            <one-to-many class="entity.eProducts"/>
+        </set>
     </class>
 </hibernate-mapping>

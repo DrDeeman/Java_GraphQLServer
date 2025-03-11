@@ -1,7 +1,8 @@
 package org.example.entity;
-// Generated 7 мар. 2025 г., 11:03:17 by Hibernate Tools 3.2.2.GA
+// Generated 10 мар. 2025 г., 15:08:01 by Hibernate Tools 3.2.2.GA
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -25,16 +26,23 @@ public class eProducts implements java.io.Serializable {
     private Date year_issue;
     private double raiting;
     private String path_image;
+    private eUsers user;
 
     public eProducts() {
     }
 
-    public eProducts(String name, BigDecimal price, Date year_issue, double raiting, String path_image) {
+
+    public eProducts(eUsers user) {
+        this.user = user;
+    }
+
+    public eProducts(String name, BigDecimal price, Date year_issue, double raiting, String path_image, eUsers user) {
         this.name = name;
         this.price = price;
         this.year_issue = year_issue;
         this.raiting = raiting;
         this.path_image = path_image;
+        this.user = user;
     }
 
     @Id
@@ -44,7 +52,6 @@ public class eProducts implements java.io.Serializable {
     public int getId() {
         return this.id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -95,6 +102,16 @@ public class eProducts implements java.io.Serializable {
         this.path_image = path_image;
     }
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
+    public eUsers getUser() {
+        return this.user;
+    }
+
+    public void setUser(eUsers user) {
+        this.user = user;
+    }
+
     /**
      * toString
      *
@@ -110,6 +127,7 @@ public class eProducts implements java.io.Serializable {
         buffer.append("year_issue").append("='").append(getYear_issue()).append("' ");
         buffer.append("raiting").append("='").append(getRaiting()).append("' ");
         buffer.append("path_image").append("='").append(getPath_image()).append("' ");
+        buffer.append("user").append("='").append(getUser()).append("' ");
         buffer.append("]");
 
         return buffer.toString();
@@ -126,7 +144,8 @@ public class eProducts implements java.io.Serializable {
                 && ((this.getPrice() == castOther.getPrice()) || (this.getPrice() != null && castOther.getPrice() != null && this.getPrice().equals(castOther.getPrice())))
                 && ((this.getYear_issue() == castOther.getYear_issue()) || (this.getYear_issue() != null && castOther.getYear_issue() != null && this.getYear_issue().equals(castOther.getYear_issue())))
                 && (this.getRaiting() == castOther.getRaiting())
-                && ((this.getPath_image() == castOther.getPath_image()) || (this.getPath_image() != null && castOther.getPath_image() != null && this.getPath_image().equals(castOther.getPath_image())));
+                && ((this.getPath_image() == castOther.getPath_image()) || (this.getPath_image() != null && castOther.getPath_image() != null && this.getPath_image().equals(castOther.getPath_image())))
+                && ((this.getUser() == castOther.getUser()) || (this.getUser() != null && castOther.getUser() != null && this.getUser().equals(castOther.getUser())));
     }
 
     public int hashCode() {
@@ -138,6 +157,7 @@ public class eProducts implements java.io.Serializable {
         result = 37 * result + (getYear_issue() == null ? 0 : this.getYear_issue().hashCode());
         result = 37 * result + (int) this.getRaiting();
         result = 37 * result + (getPath_image() == null ? 0 : this.getPath_image().hashCode());
+        result = 37 * result + (getUser() == null ? 0 : this.getUser().hashCode());
         return result;
     }
 

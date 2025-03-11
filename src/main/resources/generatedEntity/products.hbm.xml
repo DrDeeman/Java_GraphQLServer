@@ -17,5 +17,8 @@
         <property name="year_issue" column="year_issue" type="timestamp"/>
         <property name="raiting" column="raiting" type="double"/>
         <property name="path_image" column="page_image" type="string"/>
+        <many-to-one name="user" class="entity.eUsers" fetch="select">
+            <column name="userId" not-null="true"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

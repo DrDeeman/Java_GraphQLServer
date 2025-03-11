@@ -2,7 +2,15 @@ package org.example.entity;
 // Generated 7 мар. 2025 г., 11:03:17 by Hibernate Tools 3.2.2.GA
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -21,19 +29,22 @@ public class eUsers implements java.io.Serializable {
     private String password;
     private String email;
 
+    private List<eProducts> products;
+
     public eUsers() {
     }
 
-    public eUsers(String name, String login, String password, String email) {
+    public eUsers(String name, String login, String password, String email, List<eProducts> products) {
         this.name = name;
         this.login = login;
         this.password = password;
         this.email = email;
+        this.products = products;
     }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    
+
     @Column(name = "id", nullable = false)
     public int getId() {
         return this.id;
@@ -79,6 +90,16 @@ public class eUsers implements java.io.Serializable {
         this.email = email;
     }
 
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    public List<eProducts> getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(List<eProducts> products) {
+        this.products = products;
+    }
+
     /**
      * toString
      *
@@ -93,6 +114,7 @@ public class eUsers implements java.io.Serializable {
         buffer.append("login").append("='").append(getLogin()).append("' ");
         buffer.append("password").append("='").append(getPassword()).append("' ");
         buffer.append("email").append("='").append(getEmail()).append("' ");
+        buffer.append("products").append("='").append(getProducts()).append("' ");
         buffer.append("]");
 
         return buffer.toString();
@@ -108,7 +130,8 @@ public class eUsers implements java.io.Serializable {
                 && ((this.getName() == castOther.getName()) || (this.getName() != null && castOther.getName() != null && this.getName().equals(castOther.getName())))
                 && ((this.getLogin() == castOther.getLogin()) || (this.getLogin() != null && castOther.getLogin() != null && this.getLogin().equals(castOther.getLogin())))
                 && ((this.getPassword() == castOther.getPassword()) || (this.getPassword() != null && castOther.getPassword() != null && this.getPassword().equals(castOther.getPassword())))
-                && ((this.getEmail() == castOther.getEmail()) || (this.getEmail() != null && castOther.getEmail() != null && this.getEmail().equals(castOther.getEmail())));
+                && ((this.getEmail() == castOther.getEmail()) || (this.getEmail() != null && castOther.getEmail() != null && this.getEmail().equals(castOther.getEmail())))
+                && ((this.getProducts() == castOther.getProducts()) || (this.getProducts() != null && castOther.getProducts() != null && this.getProducts().equals(castOther.getProducts())));
     }
 
     public int hashCode() {
@@ -119,6 +142,7 @@ public class eUsers implements java.io.Serializable {
         result = 37 * result + (getLogin() == null ? 0 : this.getLogin().hashCode());
         result = 37 * result + (getPassword() == null ? 0 : this.getPassword().hashCode());
         result = 37 * result + (getEmail() == null ? 0 : this.getEmail().hashCode());
+        result = 37 * result + (getProducts() == null ? 0 : this.getProducts().hashCode());
         return result;
     }
 
