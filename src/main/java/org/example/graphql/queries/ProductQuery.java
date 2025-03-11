@@ -1,6 +1,7 @@
 package org.example.graphql.queries;
 
 import graphql.com.google.common.collect.Lists;
+import graphql.schema.DataFetchingEnvironment;
 import org.example.entity.eProducts;
 import org.example.repository.products.CustomizedProductsCrudRepository;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -22,7 +23,10 @@ public class ProductQuery {
     }
 
     @QueryMapping
-    public eProducts getProduct(@Argument final int id) {
+    public eProducts getProduct(@Argument final int id, DataFetchingEnvironment data) {
+        if(data.getSelectionSet().contains("user")){
+            return productsRepository.findByIdWithUser(id).orElseThrow();
+        }
         return productsRepository.findById(id).orElseThrow();
     }
 

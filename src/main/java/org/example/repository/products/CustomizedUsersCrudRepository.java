@@ -18,5 +18,7 @@ public interface CustomizedUsersCrudRepository extends JpaRepository<eUsers, Int
       //   SELECT users.id AS userId, users.name AS userName, users.login, users.password, users.email, products.*
        //   FROM users LEFT JOIN products ON users.id = products.user_id
        //  """, nativeQuery = true)
-    List<eUsers> findAll();
+    List<eUsers> findAllWithProducts();
+
+
 }
