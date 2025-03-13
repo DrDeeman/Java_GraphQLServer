@@ -11,7 +11,8 @@ getUsersAll:[User]
 }
 
 extend type Mutation{
-createOrUpdateUser(userInput: UserInput!): User
+createOrUpdateUser(userInput: UserInput!): User!,
+deleteUser(id: ID!): Boolean!
 }
 
 input UserInput{

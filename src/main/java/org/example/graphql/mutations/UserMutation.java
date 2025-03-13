@@ -30,4 +30,11 @@ public class UserMutation {
     }
 
 
+    @MutationMapping
+    public boolean deleteUser(@Argument int id) {
+        this.usersRepository.deleteById(id);
+        return usersRepository.findById(id).isEmpty();
+    }
+
+
 }
