@@ -14,3 +14,7 @@ type Query{
 getProduct(id: ID!):Product
 getProductsAll:[Product]
 }
+
+type Mutation{
+
+}

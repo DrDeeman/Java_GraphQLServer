@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface CustomizedProductsCrudRepository extends JpaRepository<eProducts, Integer> {
 
-    @Query(value = "FROM eProducts p JOIN FETCH p.user WHERE p.id=:id")
+    @Query(value = "FROM eProducts p LEFT JOIN FETCH p.user WHERE p.id=:id")
     Optional<eProducts> findByIdWithUser(int id);
 }
