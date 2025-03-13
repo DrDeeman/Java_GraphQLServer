@@ -18,14 +18,16 @@ public class UserMutation {
 
     UserMutation(
             CustomizedUsersCrudRepository usersRepository
-    ){
+    ) {
         this.usersRepository = usersRepository;
     }
 
     @MutationMapping
-    public eUsers createUser(@Argument UserInput userInput){
-       return this.usersRepository.saveAndFlush(
-               new eUsers(userInput.name(), userInput.login(), userInput.password(), userInput.email(), List.of())
-       );
+    public eUsers createOrUpdateUser(@Argument UserInput userInput) {
+        eUsers user = new eUsers(userInput.name(), userInput.login(), userInput.password(), userInput.email(), List.of());
+        user.setId(userInput.id());
+        return this.usersRepository.saveAndFlush(user);
     }
+
+
 }
