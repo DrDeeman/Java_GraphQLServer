@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -23,7 +25,7 @@ public class eProducts implements java.io.Serializable {
     private int id;
     private String name;
     private BigDecimal price;
-    private Date year_issue;
+    private LocalDateTime year_issue;
     private double raiting;
     private String path_image;
     private eUsers user;
@@ -36,7 +38,7 @@ public class eProducts implements java.io.Serializable {
         this.user = user;
     }
 
-    public eProducts(String name, BigDecimal price, Date year_issue, double raiting, String path_image, eUsers user) {
+    public eProducts(String name, BigDecimal price, LocalDateTime year_issue, double raiting, String path_image, eUsers user) {
         this.name = name;
         this.price = price;
         this.year_issue = year_issue;
@@ -47,7 +49,6 @@ public class eProducts implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-
     @Column(name = "id", nullable = false)
     public int getId() {
         return this.id;
@@ -76,11 +77,11 @@ public class eProducts implements java.io.Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "year_issue")
-    public Date getYear_issue() {
+    public LocalDateTime getYear_issue() {
         return this.year_issue;
     }
 
-    public void setYear_issue(Date year_issue) {
+    public void setYear_issue(LocalDateTime year_issue) {
         this.year_issue = year_issue;
     }
 

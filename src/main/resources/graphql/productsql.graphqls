@@ -16,5 +16,15 @@ getProductsAll:[Product]
 }
 
 type Mutation{
+createOrUpdateProduct(productInput: ProductInput!):User,
+deleteProduct(id: ID!): Boolean
+}
 
+input ProductInput{
+id: ID,
+name: String!,
+price: Float!,
+year_issue: String!,
+raiting: Float!,
+userId: ID!
 }

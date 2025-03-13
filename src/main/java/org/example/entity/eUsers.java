@@ -90,13 +90,18 @@ public class eUsers implements java.io.Serializable {
     }
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     public List<eProducts> getProducts() {
         return this.products;
     }
 
     public void setProducts(List<eProducts> products) {
         this.products = products;
+    }
+
+    public void addProduct(eProducts product) {
+        this.products.add(product);
+        product.setUser(this);
     }
 
     /**
